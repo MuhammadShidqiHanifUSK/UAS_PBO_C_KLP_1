@@ -1,10 +1,10 @@
 # Project UAS Praktikum Pemrograman Berbasis Objek Kelas C Kelompok 1 T.A Ganjil 2025/2026 - Aplikasi Kasir Restoran
 Anggota Kelompok 1:
-2408107010003 - Niswatul 'Azimah
-2408107010079 - Roseline Balqist
-2408107010091 - Teuku Farid Haqi
-2408107010096 - Muhammad Shidqi Hanif
-2408107010106 - Muhammad Fariz Alfisaputra
+1. 2408107010003 - Niswatul 'Azimah
+2. 2408107010079 - Roseline Balqist
+3. 2408107010091 - Teuku Farid Haqi
+4. 2408107010096 - Muhammad Shidqi Hanif
+5. 2408107010106 - Muhammad Fariz Alfisaputra
 
 # 1. Deskripsi Project
 **Nama Project: Aplikasi Kasir Restoran**
