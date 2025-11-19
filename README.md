@@ -5,6 +5,7 @@ Anggota Kelompok 1:
 3. 2408107010091 - Teuku Farid Haqi
 4. 2408107010096 - Muhammad Shidqi Hanif
 5. 2408107010106 - Muhammad Fariz Alfisaputra
+6. 2408107010100 - Cut Farah Salsabila
 
 # 1. Deskripsi Project
 **Nama Project: Aplikasi Kasir Restoran**
