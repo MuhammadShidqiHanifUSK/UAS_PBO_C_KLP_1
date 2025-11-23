@@ -1,21 +1,19 @@
-package id.univ.uaspbo;  // Package tempat class ini berada. Menentukan struktur folder/namespace aplikasi.
+package id.univ.uaspbo;
 
-import org.springframework.boot.SpringApplication;  // Class yang dipakai untuk menjalankan (start) aplikasi Spring Boot.
-
-import org.springframework.boot.autoconfigure.SpringBootApplication;  // Anotasi utama Spring Boot yang mengaktifkan konfigurasi otomatis dan scanning komponen.
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
- * Kelas utama aplikasi.
- * Sebagai entry point (titik masuk) ketika program dijalankan.
+ * Kelas utama untuk aplikasi web UAS PBO ini.
+ * Kelas ini menggunakan anotasi @SpringBootApplication yang menandakan kelas
+ * ini sebagai titik awal aplikasi Spring Boot berjalan.
+ * 
+ * Fungsi utama kelas ini adalah menjalankan aplikasi dengan memicu metode main,
+ * yang memulai konteks Spring dan melakukan konfigurasi otomatis.
  */
-@SpringBootApplication  // Mengaktifkan auto-configuration, component scan, dan konfigurasi Spring.
+@SpringBootApplication
 public class UasPboWebApplication {
-
     public static void main(String[] args) {
-        // Method main sbgai titik awal eksekusi program Java.
-        
-        // Memulai aplikasi Spring Boot.
-        // Spring akan menjalankan server Tomcat, memuat Controller, Service, Repository, template, dll.
         SpringApplication.run(UasPboWebApplication.class, args);
     }
 }
