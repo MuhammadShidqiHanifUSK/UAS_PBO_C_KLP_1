@@ -8,6 +8,18 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import jakarta.servlet.http.HttpSession;
 
+/**
+ * Kelas controller yang mengelola semua operasi terkait admin,
+ * seperti manajemen produk, transaksi, pengguna, dan laporan dalam sistem.
+ * Kelas ini bertindak sebagai penghubung antara view (template) dan service
+ * yang memproses data bisnis pada bagian admin aplikasi.
+ * Semua method di kelas ini memerlukan autentikasi sebagai admin agar dapat diakses.
+ *
+ * Konsep Object Oriented Programming (OOP) yang dipakai:
+ * - Inheritance (Pewarisan): Controller ini mewarisi class dasar Controller Spring
+ * - Enkapsulasi: Menggunakan private fields untuk service yang diinject melalui konstruktor
+ *   dan hanya menyediakan method akses public untuk routing HTTP.
+ */
 @Controller
 @RequestMapping("/admin")
 public class AdminController {
@@ -15,18 +27,31 @@ public class AdminController {
     private final ProductService productService;
     private final TransactionService transactionService;
     private final UserService userService;
-
+   
+    /**
+     * Konstruktor utama kelas AdminController.
+     * Menginisialisasi service produk, transaksi, dan pengguna yang akan digunakan oleh controller.
+     */
     public AdminController(ProductService productService, TransactionService transactionService, UserService userService) {
         this.productService = productService;
         this.transactionService = transactionService;
         this.userService = userService;
     }
 
+    /**
+     * Mengecek apakah pengguna pada sesi saat ini memiliki peran sebagai admin
+     */
     private boolean isAdmin(HttpSession s) {
         var u = s.getAttribute("user");
         return u != null && ((id.univ.uaspbo.model.User)u).getRole().equalsIgnoreCase("ADMIN");
     }
 
+    /**
+     * Menampilkan halaman dashboard admin yang berisi ringkasan
+     * data produk, transaksi, dan pengguna.
+     * Halaman ini hanya dapat diakses oleh admin yang sudah login,
+     * jika bukan admin maka akan diarahkan ke halaman login.
+     */
     @GetMapping
     public String dashboard(HttpSession s, Model m) {
         if (!isAdmin(s)) return "redirect:/login";
@@ -36,6 +61,11 @@ public class AdminController {
         return "admin/dashboard";
     }
 
+    /**
+     * Menampilkan halaman manajemen produk yang berisi daftar produk.
+     * Hanya dapat diakses oleh admin yang sudah login.
+     * Jika bukan admin, pengguna diarahkan ke halaman login.
+     */
     @GetMapping("/products")
     public String products(HttpSession s, Model m) {
         if (!isAdmin(s)) return "redirect:/login";
@@ -43,6 +73,12 @@ public class AdminController {
         return "admin/products";
     }
 
+    /**
+     * Menampilkan halaman manajemen pengguna yang meliputi daftar pengguna
+     * dan riwayat transaksi mereka.
+     * Hanya dapat diakses oleh admin yang sudah login.
+     * Jika bukan admin, pengguna diarahkan ke halaman login.
+     */
     @GetMapping("/users")
     public String users(HttpSession s, Model m) {
         if (!isAdmin(s)) return "redirect:/login";
@@ -51,6 +87,13 @@ public class AdminController {
         return "admin/users";
     }
 
+    /**
+     * Menampilkan halaman laporan yang berisi ringkasan
+     * statistik transaksi seperti total pendapatan, jumlah pesanan,
+     * rata-rata nilai pesanan, dan nilai pesanan tertinggi.
+     * Hanya dapat diakses oleh admin yang sudah login.
+     * Jika bukan admin, pengguna diarahkan ke halaman login.
+     */
     @GetMapping("/reports")
     public String reports(HttpSession s, Model m) {
         if (!isAdmin(s)) return "redirect:/login";
@@ -66,6 +109,11 @@ public class AdminController {
         return "admin/reports";
     }
 
+    /**
+     * Menampilkan halaman daftar transaksi.
+     * Hanya dapat diakses oleh admin yang sudah login.
+     * Jika bukan admin, pengguna diarahkan ke halaman login.
+     */
     @GetMapping("/transactions")
     public String transactions(HttpSession s, Model m) {
         if (!isAdmin(s)) return "redirect:/login";
@@ -73,6 +121,11 @@ public class AdminController {
         return "admin/transactions";
     }
 
+    /**
+     * Menambahkan pengguna baru ke sistem berdasarkan data dari form.
+     * Hanya admin yang sudah login dapat melakukan aksi ini.
+     * Jika bukan admin, pengguna diarahkan ke halaman login.
+     */
     @PostMapping("/users/add")
     public String addUser(HttpSession s, @RequestParam String email, @RequestParam String password, @RequestParam String role) {
         if (!isAdmin(s)) return "redirect:/login";
@@ -84,6 +137,11 @@ public class AdminController {
         return "redirect:/admin/users";
     }
 
+    /**
+     * Memperbarui peran (role) pengguna berdasarkan email pengguna yang sudah ada.
+     * Hanya admin yang sudah login dapat mengakses fungsi ini.
+     * Jika bukan admin, pengguna diarahkan ke halaman login.
+     */
     @PostMapping("/users/update-role")
     public String updateUserRole(HttpSession s, @RequestParam String email, @RequestParam String role) {
         if (!isAdmin(s)) return "redirect:/login";
@@ -95,6 +153,11 @@ public class AdminController {
         return "redirect:/admin/users";
     }
 
+    /**
+     * Menghapus pengguna dari sistem berdasarkan emailnya.
+     * Hanya admin yang sudah login dapat melakukan penghapusan ini.
+     * Jika bukan admin, pengguna diarahkan ke halaman login.
+     */
     @PostMapping("/users/delete")
     public String deleteUser(HttpSession s, @RequestParam String email) {
         if (!isAdmin(s)) return "redirect:/login";
@@ -102,6 +165,13 @@ public class AdminController {
         return "redirect:/admin/users";
     }
 
+    /**
+     * Melakukan penyimpanan data secara manual.
+     * Walaupun data sudah otomatis tersimpan melalui FileRepository,
+     * method ini dapat digunakan untuk memaksa penyimpanan saat dibutuhkan.
+     * Hanya admin yang sudah login dapat menggunakan fitur ini.
+     * Jika bukan admin, pengguna diarahkan ke halaman login.
+     */
     @PostMapping("/save")
     public String saveData(HttpSession s) {
         if (!isAdmin(s)) return "redirect:/login";
@@ -109,6 +179,11 @@ public class AdminController {
         return "redirect:/admin";
     }
     
+    /**
+     * Menangani penambahan produk baru dari form input admin.
+     * Hanya admin yang sudah login dapat menambahkan produk baru.
+     * Jika bukan admin, pengguna diarahkan ke halaman login.
+     */
     @PostMapping("/products/add")
     public String addProduct(HttpSession s,
                              @RequestParam String name,
@@ -122,7 +197,12 @@ public class AdminController {
         productService.add(p);
         return "redirect:/admin/products";
     }
-
+   
+    /**
+     * Menangani pembaruan data produk yang sudah ada berdasarkan form input.
+     * Hanya admin yang sudah login dapat melakukan pembaruan data produk.
+     * Jika bukan admin, pengguna diarahkan ke halaman login.
+     */
     @PostMapping("/products/update")
     public String updateProduct(HttpSession s,
                                 @RequestParam String id,
@@ -139,7 +219,12 @@ public class AdminController {
         }
         return "redirect:/admin/products";
     }
-
+    
+    /**
+     * Menangani penghapusan produk berdasarkan ID produk.
+     * Hanya admin yang sudah login dapat menghapus produk.
+     * Jika bukan admin, pengguna diarahkan ke halaman login.
+     */
     @PostMapping("/products/delete")
     public String deleteProduct(HttpSession s,
                                 @RequestParam String id) {
