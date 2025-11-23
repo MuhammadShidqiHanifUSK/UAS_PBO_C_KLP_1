@@ -11,24 +11,41 @@ import org.springframework.web.bind.annotation.*;
 import jakarta.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * Kelas controller yang mengelola operasi pengguna,
+ * termasuk penjelajahan produk, pemrosesan checkout,
+ * dan peninjauan riwayat transaksi.
+ * Semua method dalam kelas ini memerlukan autentikasi pengguna.
+ */
 @Controller
 @RequestMapping("/user")
 public class UserController {
 
     private final ProductService productService;
     private final TransactionService transactionService;
-
+    
+    /**
+     * Konstruktor utama UserController yang menerima service produk
+     * dan transaksi untuk melayani permintaan pengguna.
+     */
     public UserController(ProductService productService, TransactionService transactionService) {
         this.productService = productService;
         this.transactionService = transactionService;
     }
 
+    /**
+     * Memeriksa apakah pengguna pada sesi saat ini memiliki peran USER.
+     */
     private boolean isUser(HttpSession s) {
         var u = s.getAttribute("user");
         return u != null && ((User) u).getRole().equalsIgnoreCase("USER");
     }
     
+    /**
+     * Menampilkan halaman dashboard pengguna dengan daftar produk
+     * yang dapat dicari dan diurutkan sesuai kriteria.
+     * Jika pengguna belum login, diarahkan ke halaman login.
+     */
     @GetMapping
     public String dashboard(HttpSession s, Model m,
                             @RequestParam(required = false) String search,
@@ -42,6 +59,13 @@ public class UserController {
         return "user/dashboard";
     }
 
+    /**
+     * Memproses checkout produk yang dipilih oleh pengguna.
+     * Membuat daftar item transaksi berdasarkan produk dan jumlah yang dipilih,
+     * menghitung total pembayaran, dan mencatat transaksi.
+     * Jika tidak ada item yang dipilih, menampilkan pesan error pada dashboard.
+     * Jika sesi pengguna tidak valid, diarahkan ke login.
+     */
     @PostMapping("/checkout")
     public String checkout(HttpSession s,
                            @RequestParam(name = "productId") String[] productIds,
@@ -77,6 +101,10 @@ public class UserController {
         return "redirect:/user/history";
     }
     
+    /**
+     * Menampilkan riwayat transaksi dari pengguna saat ini.
+     * Jika sesi tidak valid, diarahkan ke halaman login.
+     */
     @GetMapping("/history")
     public String history(HttpSession s, Model m) {
         var u = (User) s.getAttribute("user");
