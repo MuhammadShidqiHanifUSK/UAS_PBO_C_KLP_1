@@ -14,7 +14,7 @@ body {
   overflow-x: hidden;
 }
 
-/*!
+/*
  * style.css
  * File ini berisi styling umum untuk antarmuka web aplikasi.
  * Menggunakan tema gelap dengan warna gradasi dan efek glassmorphism.
@@ -1376,6 +1376,10 @@ body {
   font-weight: 700;
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
   position: relative;
+}
+
+.login-link {
+  color: #808080;
 }
 
 .page-header::after {

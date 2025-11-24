@@ -1378,6 +1378,10 @@ body {
   position: relative;
 }
 
+.login-link {
+  color: #808080;
+}
+
 .page-header::after {
   content: '';
   position: absolute;
