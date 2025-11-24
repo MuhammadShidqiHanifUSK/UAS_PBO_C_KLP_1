@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import jakarta.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
+
 /**
  * Kelas controller yang mengelola operasi pengguna,
  * termasuk penjelajahan produk, pemrosesan checkout,
@@ -23,7 +24,7 @@ public class UserController {
 
     private final ProductService productService;
     private final TransactionService transactionService;
-    
+
     /**
      * Konstruktor utama UserController yang menerima service produk
      * dan transaksi untuk melayani permintaan pengguna.
@@ -40,7 +41,7 @@ public class UserController {
         var u = s.getAttribute("user");
         return u != null && ((User) u).getRole().equalsIgnoreCase("USER");
     }
-    
+
     /**
      * Menampilkan halaman dashboard pengguna dengan daftar produk
      * yang dapat dicari dan diurutkan sesuai kriteria.
@@ -100,11 +101,13 @@ public class UserController {
 
         return "redirect:/user/history";
     }
-    
+
+
     /**
      * Menampilkan riwayat transaksi dari pengguna saat ini.
      * Jika sesi tidak valid, diarahkan ke halaman login.
      */
+    
     @GetMapping("/history")
     public String history(HttpSession s, Model m) {
         var u = (User) s.getAttribute("user");
