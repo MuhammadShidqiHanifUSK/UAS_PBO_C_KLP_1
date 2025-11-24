@@ -14,16 +14,16 @@ Aplikasi Kasir Restoran ini dibuat sebagai project UAS Praktikum Pemrograman Ber
 
 Aplikasi ini menerapkan seluruh konsep inti OOP sesuai ketentuan UAS, termasuk  **encapsulation, inheritance, polymorphism, abstraction, serta penggunaan collection dan exception handling**. Seluruh class terstruktur rapi, terdokumentasi dengan Javadoc, dan disusun dalam package sesuai perannya.
 
-Secara umum, aplikasi menyediakan dua jenis akun—**Admin** dan **User**—dengan fungsionalitas berbeda. Admin dapat mengelola seluruh data restoran seperti menambah, mengubah, dan menghapus menu, serta melihat user dan riwayat transaksi. Sementara User dapat melihat menu, melakukan pemesanan, melakukan pembayaran, dan melihat riwayat transaksi mereka sendiri. Semua proses transaksi dicatat secara otomatis untuk memastikan data tetap konsisten.
+Secara umum, aplikasi menyediakan dua jenis akun **Admin** dan **User** dengan fungsionalitas berbeda. Admin dapat mengelola seluruh data restoran seperti menambah, mengubah, dan menghapus menu, serta melihat user dan riwayat transaksi. Sementara User dapat melihat menu, melakukan pemesanan, melakukan pembayaran, dan melihat riwayat transaksi mereka sendiri. Semua proses transaksi dicatat secara otomatis untuk memastikan data tetap konsisten.
 
-Aplikasi ini dibangun dengan **pendekatan modular** agar mudah dikembangkan, dibaca, dan dipelihara, sekaligus memenuhi seluruh standar penilaian—baik dari sisi fungsional, konsep OOP, maupun dokumentasi dan struktur kode.
+Aplikasi ini dibangun dengan **pendekatan modular** agar mudah dikembangkan, dibaca, dan dipelihara, sekaligus memenuhi seluruh standar penilaian baik dari sisi fungsional, konsep OOP, maupun dokumentasi dan struktur kode.
 # UAS-PBO-WEB
 
 Panduan ini menjelaskan cara menjalankan aplikasi dari repository ini, dengan instruksi khusus untuk:
 - macOS (Apple Silicon / M1 / M2)
 - Windows (PowerShell / CMD)
 
-Jika repo memiliki Maven Wrapper (`mvnw` / `mvnw.cmd`), gunakan wrapper tersebut — lebih mudah karena tidak perlu memasang Maven global.
+Jika repo memiliki Maven Wrapper (`mvnw` / `mvnw.cmd`), gunakan wrapper tersebut lebih mudah karena tidak perlu memasang Maven global.
 
 ---
 
