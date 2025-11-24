@@ -1,0 +1,233 @@
+<!--
+  File ini adalah template HTML untuk halaman manajemen pengguna di panel admin.
+  Fungsi utama halaman ini adalah untuk memungkinkan admin mengelola pengguna yang terdaftar,
+  termasuk menampilkan daftar pengguna, mengubah peran pengguna, menambah pengguna baru,
+  dan menghapus pengguna.
+
+  Template ini dibuat dengan Thymeleaf sebagai template engine dan menggunakan layout fragmen header untuk konsistensi tampilan.
+
+  Data pengguna didapatkan dari backend melalui AdminController dan diteruskan ke variabel "users".
+  
+  Fitur yang disediakan halaman ini meliputi:
+  - Statistik jumlah total pengguna, pengguna bertipe admin, dan pengguna reguler.
+  - Tabel pengguna dengan kolom email, kata sandi, peran, dan status aksi.
+  - Form untuk memperbarui peran pengguna secara individu.
+  - Form untuk menghapus pengguna berdasarkan email.
+  - Form untuk menambahkan pengguna baru dengan isian email, kata sandi, dan peran.
+  - Navigasi cepat untuk kembali ke dashboard, melihat transaksi, dan laporan.
+  - Form untuk menyimpan perubahan yang dilakukan admin.
+
+  Endpoint penting yang dipakai pada form:
+  - /admin/users/update-role (POST) untuk mengubah peran pengguna
+  - /admin/users/delete (POST) untuk menghapus pengguna
+  - /admin/users/add (POST) untuk menambah pengguna baru
+  - /admin/save (POST) untuk menyimpan perubahan
+
+  Halaman ini penting untuk pengelolaan pengguna dan keamanan akses aplikasi.
+  Terhubung langsung dengan AdminController.java yang mengelola logika pengguna dan penyediaan data.
+
+-->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/header}">
+<head>
+  <title>Kelola Pengguna</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+  <div layout:fragment="content">
+    <div class="container admin-dashboard">
+      <h1 class="page-header">Manajemen Pengguna</h1>
+
+      <!-- Statistik Pengguna -->
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-number" th:text="${#lists.size(users)}">0</div>
+          <div class="stat-label">Total Pengguna</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number" th:text="${#lists.size(users.?[role == 'ADMIN'])}">0</div>
+          <div class="stat-label">Pengguna Admin</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number" th:text="${#lists.size(users.?[role == 'USER'])}">0</div>
+          <div class="stat-label">Pengguna Reguler</div>
+        </div>
+      </div>
+
+      <!-- Tabel Pengguna -->
+      <div class="card">
+        <div class="card-header">
+          Pengguna Terdaftar
+        </div>
+        <div class="card-body">
+          <div th:if="${#lists.isEmpty(users)}" class="alert alert-warning">
+            Belum ada pengguna yang terdaftar
+          </div>
+
+          <div th:if="${!#lists.isEmpty(users)}">
+            <div class="table-responsive">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>Email</th>
+                    <th>Kata Sandi</th>
+                    <th>Peran</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr th:each="user : ${users}">
+                    <td>
+                      <span th:text="${user.email}" class="fw-bold"></span>
+                    </td>
+                    <td>
+                      <code th:text="${user.password}" class="password-code"></code>
+                    </td>
+                    <td>
+                      <span th:class="${user.role == 'ADMIN' ? 'badge-admin' : 'badge-user'}"
+                            th:text="${user.role}" class="role-badge"></span>
+                    </td>
+                    <td>
+                      <div class="action-buttons d-flex flex-column gap-2">
+                        <!-- Edit Role Form -->
+                        <form th:action="@{/admin/users/update-role}" method="post">
+                          <input type="hidden" name="email" th:value="${user.email}" />
+                          <div class="d-flex gap-2 align-items-center">
+                            <select name="role" class="form-select form-select-sm">
+                              <option th:value="'ADMIN'" th:selected="${user.role == 'ADMIN'}">Admin</option>
+                              <option th:value="'USER'" th:selected="${user.role == 'USER'}">Pengguna</option>
+                            </select>
+                            <button type="submit" class="btn btn-warning btn-sm" title="Perbarui Peran">
+                              Perbarui
+                            </button>
+                          </div>
+                        </form>
+
+                        <!-- Delete User Form -->
+                        <form th:action="@{/admin/users/delete}" method="post">
+                          <input type="hidden" name="email" th:value="${user.email}" />
+                          <button type="submit" class="btn btn-danger btn-sm"
+                                  onclick="return confirm('Apakah Anda yakin ingin menghapus pengguna ini?');"
+                                  title="Hapus Pengguna">
+                            Hapus
+                          </button>
+                        </form>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tambah Pengguna Baru -->
+      <div class="card">
+        <div class="card-header">
+          Tambah Pengguna Baru
+        </div>
+        <div class="card-body">
+          <form th:action="@{/admin/users/add}" method="post">
+            <div class="row">
+              <div class="col">
+                <div class="form-group">
+                  <label class="form-label" for="email">Email</label>
+                  <input type="email" id="email" name="email" class="form-control" placeholder="Masukkan email" required />
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-group">
+                  <label class="form-label" for="password">Kata Sandi</label>
+                  <input type="password" id="password" name="password" class="form-control" placeholder="Masukkan kata sandi" required />
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-group">
+                  <label class="form-label" for="role">Peran</label>
+                  <select id="role" name="role" class="form-select" required>
+                    <option value="USER">Pengguna</option>
+                    <option value="ADMIN">Admin</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <button type="submit" class="btn btn-success">
+              Tambah Pengguna
+            </button>
+          </form>
+        </div>
+      </div>
+
+      <!-- Tindakan Cepat -->
+      <div class="card">
+        <div class="card-header">
+          Tindakan Cepat
+        </div>
+        <div class="card-body">
+          <div class="d-flex gap-3 flex-wrap">
+            <a th:href="@{/admin}" class="btn btn-secondary">
+              Kembali ke Dashboard
+            </a>
+            <a th:href="@{/admin/transactions}" class="btn btn-primary">
+              Lihat Transaksi
+            </a>
+            <a th:href="@{/admin/reports}" class="btn btn-warning">
+              Lihat Laporan
+            </a>
+            <form th:action="@{/admin/save}" method="post">
+              <button type="submit" class="btn btn-success">
+                Simpan Perubahan
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <style>
+    .badge-admin {
+      background: var(--danger-color);
+      color: white;
+      padding: 0.25rem 0.75rem;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+    .badge-user {
+      background: var(--primary-color);
+      color: white;
+      padding: 0.25rem 0.75rem;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+    .status-active {
+      padding: 0.25rem 0.5rem;
+      margin: 0;
+      font-size: 0.8rem;
+    }
+    .status-inactive {
+      padding: 0.25rem 0.5rem;
+      margin: 0;
+      font-size: 0.8rem;
+    }
+    .action-buttons {
+      display: flex;
+      gap: 0.5rem;
+      align-items: center;
+    }
+    .password-code {
+      background: #f8f9fa;
+      padding: 0.25rem 0.5rem;
+      border-radius: 4px;
+      font-family: monospace;
+    }
+  </style>
+</body>
+</html>
