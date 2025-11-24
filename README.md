@@ -4,10 +4,10 @@ Anggota Kelompok 1:
 2. 2408107010079 - Roseline Balqist
 3. 2408107010091 - Teuku Farid Haqi
 4. 2408107010096 - Muhammad Shidqi Hanif
-5. 2408107010106 - Muhammad Fariz Alfisaputra
-6. 2408107010100 - Cut Farah Salsabila
+5. 2408107010100 - Cut Farah Salsabila
+6. 2408107010106 - Muhammad Fariz Alfisaputra
 
-# 1. Deskripsi Project
+# Deskripsi Project
 **Nama Project: Aplikasi Kasir Restoran**
 
 Aplikasi Kasir Restoran ini dibuat sebagai project UAS Praktikum Pemrograman Berbasis Objek (PBO) kelas C 2025. Sistem ini pada tahap awal berjalan melalui Command Line Interface (CLI) dan dirancang untuk mensimulasikan proses operasional kasir restoran—mulai dari **pengelolaan menu, pemesanan, pembayaran, hingga pencatatan riwayat transaksi**. Ke depannya, aplikasi ini diharapkan dapat dikembangkan menjadi sistem yang lebih lengkap dan fleksibel, seperti versi berbasis GUI, integrasi web, maupun fitur tambahan lainnya yang mendukung kebutuhan operasional restoran secara lebih modern.
