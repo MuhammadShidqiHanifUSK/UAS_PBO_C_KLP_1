@@ -3,11 +3,20 @@ package id.univ.uaspbo.model;
 /**
  * Kelas abstrak Entity.
  * 
+ * Kelas dasar abstrak untuk semua entitas dalam sistem.
+ * Berfungsi sebagai superclass yang menyediakan atribut dan metode umum seperti identifier unik (id) yang digunakan oleh semua entitas.
  * Ini adalah **base class** untuk semua entitas (model) dalam sistem kasir.
  * Semua model seperti Product, Transaction, dan User akan mewarisi kelas ini.
  * Tujuan utamanya adalah menyediakan field dan method umum yang dibutuhkan semua entitas.
  * 
- * Field:
+ * Konsep Object-Oriented Programming (OOP) yang digunakan:
+ * Abstraksi: Kelas ini adalah kelas abstrak yang tidak bisa diinstansiasi secara langsung, dan harus diwariskan oleh kelas lainnya.
+ * Enkapsulasi: Atribut id memiliki akses protected dan diakses melalui getter dan setter.
+ * 
+ * Kelas ini menyederhanakan pengelolaan identifier unik pada semua entitas di sistem,
+ * sehingga kelas-kelas turunan dapat fokus pada atribut dan perilaku khusus mereka saja
+ * 
+* Field:
  * - id : String
  *     Sebagai identifier unik untuk setiap entitas. Bisa digunakan sebagai primary key 
  *     ketika menyimpan data ke file JSON atau database.
@@ -29,19 +38,34 @@ package id.univ.uaspbo.model;
  * - Kelas ini dirancang agar mudah di-extend oleh model-model lain.
  */
 public abstract class Entity {
-    protected String id; // Field id sebagai identifier unik untuk setiap entitas
+    /**
+     * Identifier unik yang membedakan setiap entitas.
+     * Biasanya digunakan sebagai primary key pada database.
+     */
+    protected String id;
 
-    public Entity() {} // Konstruktor default
+    /**
+     * Konstruktor default tanpa parameter.
+     * Membuat objek entitas dengan id belum diatur.
+     */
+    public Entity() {}
 
-    // Konstruktor dengan parameter id
+    /**
+     * Konstruktor dengan parameter id.
+     * Menginisialisasi entitas dengan identifier unik yang diberikan.
+     */
     public Entity(String id) {
         this.id = id;
     }
-    // Getter untuk id
+    /**
+     * Mengambil nilai identifier entitas.
+     */
     public String getId() { 
         return id; 
     }
-    // Setter untuk id
+    /**
+     * Mengatur nilai identifier entitas.
+     */
     public void setId(String id) { 
         this.id = id; 
     }
