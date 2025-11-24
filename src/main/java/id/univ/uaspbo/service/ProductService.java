@@ -27,8 +27,6 @@ public class ProductService extends AbstractService<Product> {
 
     /**
      * Mendapatkan path data produk untuk repository file.
-     *
-     * @return Path file produk
      */
     @Override
     protected String getDataPath() {
@@ -37,8 +35,6 @@ public class ProductService extends AbstractService<Product> {
 
     /**
      * Mendapatkan kelas array tipe Product untuk deserialisasi JSON.
-     *
-     * @return Kelas array produk
      */
     @Override
     protected Class<Product[]> getTypeClass() {
@@ -47,9 +43,6 @@ public class ProductService extends AbstractService<Product> {
 
     /**
      * Mendapatkan ID dari objek produk.
-     *
-     * @param product Produk
-     * @return ID produk
      */
     @Override
     protected String getEntityId(Product product) {
@@ -58,14 +51,45 @@ public class ProductService extends AbstractService<Product> {
 
     /**
      * Mengatur ID pada objek produk.
-     *
-     * @param product Produk
-     * @param id ID yang akan diset
      */
     @Override
     protected void setEntityId(Product product, String id) {
         product.setId(id);
     }
 
-    
+    /**
+     * Melakukan pencarian produk berdasarkan nama produk (case-insensitive).
+     *
+     * @param query Kata kunci pencarian
+     * @return Daftar produk yang memenuhi kriteria pencarian
+     */
+    public List<Product> searchProducts(String query) {
+        if (query == null || query.trim().isEmpty()) {
+            return getAll();
+        }
+        String lowerQuery = query.toLowerCase();
+        return getAll().stream()
+                .filter(p -> p.getName().toLowerCase().contains(lowerQuery))
+                .toList();
+    }
+
+    /**
+     * Mengurutkan daftar produk berdasarkan kriteria tertentu.
+     *
+     * @param products Daftar produk yang akan diurutkan
+     * @param sortBy Kriteria pengurutan ("name_asc", "name_desc", "price_asc", "price_desc")
+     * @return Daftar produk yang sudah diurutkan
+     */
+    public List<Product> sortProducts(List<Product> products, String sortBy) {
+        if (sortBy == null || sortBy.isEmpty()) {
+            return products;
+        }
+        return switch (sortBy) {
+            case "name_asc" -> products.stream().sorted((a, b) -> a.getName().compareToIgnoreCase(b.getName())).toList();
+            case "name_desc" -> products.stream().sorted((a, b) -> b.getName().compareToIgnoreCase(a.getName())).toList();
+            case "price_asc" -> products.stream().sorted((a, b) -> Integer.compare(a.getPrice(), b.getPrice())).toList();
+            case "price_desc" -> products.stream().sorted((a, b) -> Integer.compare(b.getPrice(), a.getPrice())).toList();
+            default -> products;
+        };
+    }
 }

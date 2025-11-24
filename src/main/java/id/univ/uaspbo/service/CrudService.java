@@ -39,22 +39,16 @@ public interface CrudService<T> {
 
     /**
      * Memperbarui entitas yang sudah ada.
-     *
-     * @param entity Entitas yang akan diperbarui.
      */
     void update(T entity);
 
     /**
      * Menghapus entitas berdasarkan ID.
-     *
-     * @param id ID entitas yang akan dihapus.
      */
     void delete(String id);
 
     /**
      * Menyimpan semua entitas untuk penyimpanan permanen.
-     *
-     * @param entities Daftar entitas yang akan disimpan.
      */
     void saveAll(List<T> entities);
 }

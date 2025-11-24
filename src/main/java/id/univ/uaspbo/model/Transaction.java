@@ -15,10 +15,10 @@ import java.util.List;
  * - Nested Class: Kelas statis inner TransactionItem mendeskripsikan detail item.
  */
 public class Transaction extends Entity {
-    private String userId; // ID pengguna yang melakukan transaksi
-    private List<TransactionItem> items; // daftar produk yang dibeli (TransactionItem)
-    private LocalDateTime timestamp; // waktu transaksi dilakukan
-    private int total; // total harga seluruh item
+    private String userId;                      // ID pengguna yang melakukan transaksi
+    private List<TransactionItem> items;        // daftar produk yang dibeli (TransactionItem)
+    private LocalDateTime timestamp;            // waktu transaksi dilakukan
+    private int total;                          // total harga seluruh item
 
     /**
      * Konstruktor default tanpa parameter.
@@ -106,10 +106,10 @@ public class Transaction extends Entity {
      * Mewakili satu item/produk dalam transaksi
      */
     public static class TransactionItem {
-        private String productId; // ID produk
+        private String productId;   // ID produk
         private String productName; // nama produk
-        private int qty; // jumlah produk yang dibeli
-        private int price; // harga per unit
+        private int qty;            // jumlah produk yang dibeli
+        private int price;          // harga per unit
 
         /**
          * Konstruktor default tanpa parameter.
@@ -117,11 +117,7 @@ public class Transaction extends Entity {
         public TransactionItem() {}
 
         /**
-         * Constructor lengkap
-         * @param productId   ID produk
-         * @param productName Nama produk
-         * @param qty         Jumlah produk yang dibeli
-         * @param price       Harga per unit
+         * Konstruktor lengkap dengan parameter.
          */
         public TransactionItem(String productId, String productName, int qty, int price) {
             this.productId = productId;

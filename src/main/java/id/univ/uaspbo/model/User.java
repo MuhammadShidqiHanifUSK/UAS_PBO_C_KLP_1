@@ -11,9 +11,9 @@ package id.univ.uaspbo.model;
  * - Enkapsulasi: Atribut email, password, dan role bersifat private dan diakses lewat getter dan setter.
  */
 public class User extends Entity {
-    private String email; // Email pengguna
-    private String password; // Password pengguna
-    private String role; // "ADMIN" or "USER"
+    private String email;       // Email pengguna
+    private String password;    // Password pengguna
+    private String role;        // "ADMIN" or "USER"
 
     /**
      * Konstruktor default tanpa parameter.
