@@ -10,13 +10,14 @@ Anggota Kelompok 1:
 # Deskripsi Project
 **Nama Project: Aplikasi Kasir Restoran**
 
-Aplikasi Kasir Restoran ini dibuat sebagai project UAS Praktikum Pemrograman Berbasis Objek (PBO) kelas C 2025. Sistem ini pada tahap awal berjalan melalui Command Line Interface (CLI) dan dirancang untuk mensimulasikan proses operasional kasir restoran—mulai dari **pengelolaan menu, pemesanan, pembayaran, hingga pencatatan riwayat transaksi**. Ke depannya, aplikasi ini diharapkan dapat dikembangkan menjadi sistem yang lebih lengkap dan fleksibel, seperti versi berbasis GUI, integrasi web, maupun fitur tambahan lainnya yang mendukung kebutuhan operasional restoran secara lebih modern.
+Aplikasi Kasir Restoran ini dibuat sebagai project UAS Praktikum Pemrograman Berbasis Objek (PBO) kelas C 2025. Sistem ini pada tahap awal berjalan melalui Command Line Interface (CLI) dan dirancang untuk mensimulasikan proses operasional kasir restoran—mulai dari **pengelolaan menu, pemesanan, pembayaran, hingga pencatatan riwayat transaksi**. Sekarang aplikasi ini sudah dikembangkan menjadi sistem berbasis web localhost menggunakan arsitektur MVC sederhana, sehingga lebih modern dan mudah digunakan dibanding versi CLI.
 
 Aplikasi ini menerapkan seluruh konsep inti OOP sesuai ketentuan UAS, termasuk  **encapsulation, inheritance, polymorphism, abstraction, serta penggunaan collection dan exception handling**. Seluruh class terstruktur rapi, terdokumentasi dengan Javadoc, dan disusun dalam package sesuai perannya.
 
 Secara umum, aplikasi menyediakan dua jenis akun **Admin** dan **User** dengan fungsionalitas berbeda. Admin dapat mengelola seluruh data restoran seperti menambah, mengubah, dan menghapus menu, serta melihat user dan riwayat transaksi. Sementara User dapat melihat menu, melakukan pemesanan, melakukan pembayaran, dan melihat riwayat transaksi mereka sendiri. Semua proses transaksi dicatat secara otomatis untuk memastikan data tetap konsisten.
 
 Aplikasi ini dibangun dengan **pendekatan modular** agar mudah dikembangkan, dibaca, dan dipelihara, sekaligus memenuhi seluruh standar penilaian baik dari sisi fungsional, konsep OOP, maupun dokumentasi dan struktur kode.
+
 # UAS_PBO_C_KLP_1
 
 Panduan ini menjelaskan cara menjalankan aplikasi dari repository ini, dengan instruksi khusus untuk:
@@ -68,16 +69,6 @@ Verifikasi dasar:
 
 4. Buka browser:
    http://localhost:8080
-   (port default: 8080 — cek `src/main/resources/application.properties`/`application.yml` bila beda)
-
----
-
-## Build dan jalankan jar (alternatif)
-1. Build:
-   mvn clean package
-
-2. Jalankan:
-   java -jar target/*.jar
 
 ---
 
@@ -139,66 +130,7 @@ Catatan: jika ingin memaksa satu perintah menggunakan JDK 17 tanpa mengubah shel
    mvn -v
 
 6. Jalankan:
-   mvn spring-boot:run
-   atau build & jalankan jar:
-   mvn clean package
-   java -jar target\<nama-file>.jar
-
----
-
-## Menjalankan dengan Docker (opsional)
-Jika tidak ingin memasang Java/Maven lokal:
-
-- macOS / Linux:
-  docker run --rm -it -v "$PWD":/usr/src/app -w /usr/src/app maven:3.8.8-openjdk-17 mvn spring-boot:run
-
-- Windows PowerShell:
-  docker run --rm -it -v "${PWD}:/usr/src/app" -w /usr/src/app maven:3.8.8-openjdk-17 mvn spring-boot:run
-
----
-
-## Konfigurasi environment / database
-- Periksa file contoh atau konfigurasi:
-  - .env.example, .env
-  - src/main/resources/application.properties
-  - src/main/resources/application.yml
-
-- Contoh mengganti konfigurasi secara temporer:
-  SPRING_DATASOURCE_URL=jdbc:... SPRING_DATASOURCE_USERNAME=user SPRING_DATASOURCE_PASSWORD=pass mvn spring-boot:run
-
-- Untuk Spring Boot, kamu juga bisa mengubah profile:
-  mvn spring-boot:run -Dspring-boot.run.profiles=dev
-
----
-
-## Troubleshooting cepat
-
-- zsh: command not found: mvn
-  - Gunakan ./mvnw jika ada, atau pasang Maven dan pastikan PATH benar.
-
-- JVM crash (SIGBUS / Abort trap)
-  - Biasanya JDK tidak cocok untuk arsitektur. Gunakan Temurin/OpenJDK 17.
-  - Coba jalankan:
-    JAVA_HOME=$(/usr/libexec/java_home -v17) mvn spring-boot:run
-  - Periksa file `hs_err_pid*.log` jika ada:
-    head -n 200 hs_err_pid*.log
-
-- Port 8080 sudah dipakai
-  - Cari proses dan hentikan:
-    lsof -i :8080
-    kill <PID>
-  - Atau jalankan di port lain:
-    mvn spring-boot:run -Dspring-boot.run.arguments="--server.port=8081"
-
-- Dependensi/build error
-  - mvn clean install -DskipTests
-  - Periksa stacktrace untuk petunjuk dependensi yang gagal.
-
-- ~/.zshrc berantakan setelah paste perintah
-  - Edit file dan hapus baris yang salah:
-    nano ~/.zshrc
-  - Simpan, lalu:
-    source ~/.zshrc
+   mvn compile && mvn spring-boot:run
 
 ---
 
@@ -217,3 +149,42 @@ Buka:
 - Sertakan environment (OS, Java version) saat melaporkan bug.
 
 ---
+
+## Pembagian Tugas Anggota Kelompok
+
+Pada project ini, pembagian tugas dilakukan secara proporsional sesuai kemampuan dan kontribusi masing-masing anggota. Kelompok terdiri dari 6 orang, yaitu 3 laki-laki dan 3 perempuan, dengan fokus kerja yang dibagi menjadi dua bagian utama: pengembangan kode program dan penyusunan presentasi. Setiap anggota juga terlibat dalam proses commit dan kolaborasi repository GitHub.
+
+1. Tugas Tim Developer (3 Laki-laki)
+
+Tiga anggota laki-laki bertanggung jawab pada seluruh bagian pengembangan aplikasi, meliputi:
+
+- Implementasi seluruh logic backend berbasis Java & Spring Boot
+- Penyusunan struktur folder MVC (model, controller, repository, service)
+- Pembuatan seluruh class model dengan konsep OOP lengkap (inheritance, encapsulation, abstraction, polymorphism, collection)
+- Penerapan file-based repository (JSON)
+- Implementasi fitur Admin & User
+- Implementasi transaksi, menu, autentikasi, dan riwayat transaksi
+- Testing fitur dan debugging
+- Integrasi ke web localhost melalui Spring Boot
+- Commit rutin ke GitHub selama proses pengembangan
+
+2. Tugas Tim Dokumentasi & Presentasi (3 Perempuan)
+
+Tiga anggota perempuan bertanggung jawab pada dokumentasi dan penyajian project, meliputi:
+- Penyusunan slide presentasi (PPT)
+- Menyusun deskripsi sistem, use case, alur aplikasi, dan struktur OOP
+- Menyusun penjelasan setiap fitur untuk keperluan presentasi UAS
+- Membuat diagram pendukung (UML sederhana, flowchart menu, alur transaksi)
+- Dokumentasi tambahan seperti cara run, struktur folder, dan penjelasan class
+- Review akhir agar dokumen dan penjelasan konsisten
+
+3. Kolaborasi Bersama (Semua Anggota)
+
+Seluruh anggota kelompok tetap terlibat dalam tahap akhir:
+- Mengisi commit GitHub sesuai kontribusi
+- Review kode dan dokumentasi bersama
+- Menyusun penjelasan lisan untuk UAS
+- Pengujian aplikasi sebelum finalisasi
+- Penyusunan laporan dan file pendukung lainnya
+
+Pembagian kerja ini memastikan semua anggota memiliki kontribusi nyata baik pada sisi teknis maupun non-teknis, serta memenuhi standar penilaian kerja kelompok.
