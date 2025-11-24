@@ -1,0 +1,143 @@
+<!--
+  File ini adalah template HTML untuk menampilkan halaman riwayat transaksi pada panel admin.
+  Fungsi utama halaman ini adalah menampilkan daftar lengkap semua transaksi yang telah terjadi dalam sistem.
+  Halaman ini juga menampilkan statistik singkat seperti total transaksi, total pendapatan, dan nilai rata-rata pesanan.
+
+  Template ini menggunakan Thymeleaf sebagai template engine dengan layout fragmen header untuk konsistensi tampilan.
+
+  Data transaksi disediakan oleh AdminController di backend dan diteruskan ke variabel "transactions".
+  Daftar transaksi memperlihatkan rincian ID transaksi, ID pelanggan, tanggal dan waktu transaksi,
+  daftar item dengan jumlah dan harga per item, serta total harga transaksi.
+
+  Selain menampilkan tabel transaksi, halaman ini menyediakan tombol navigasi cepat untuk:
+  - Kembali ke dashboard admin
+  - Melihat laporan detail
+  - Mengelola produk
+
+  File ini sangat penting untuk memantau aktivitas penjualan dan pendapatan oleh admin.
+  Terhubung dengan AdminController.java yang mengelola data transaksi.
+
+-->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/header}">
+<head>
+  <title>Semua Transaksi</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+  <div layout:fragment="content">
+    <div class="container admin-dashboard">
+      <h1 class="page-header">Riwayat Transaksi</h1>
+
+      <!-- Ikhtisar Statistik -->
+        <div class="stats-grid">
+          <!-- Total transaksi yang tercatat -->
+          <div class="stat-card">
+            <div class="stat-number" th:text="${#lists.size(transactions)}">0</div>
+            <div class="stat-label">Total Transaksi</div>
+          </div>
+          <!-- Total pendapatan dari semua transaksi -->
+          <div class="stat-card">
+            <div class="stat-number">Rp [[${#numbers.formatInteger(#aggregates.sum(transactions.![total]), 0, 'COMMA')}]]</div>
+            <div class="stat-label">Total Pendapatan</div>
+          </div>
+          <!-- Nilai rata-rata pesanan per transaksi -->
+          <div class="stat-card">
+            <div class="stat-number" th:text="${transactions != null and !transactions.isEmpty() ? #numbers.formatInteger(#aggregates.avg(transactions.![total]), 0, 'COMMA') : '0'}">0</div>
+            <div class="stat-label">Nilai Rata-rata Pesanan</div>
+          </div>
+        </div>
+
+      <!-- Tabel Transaksi -->
+      <div class="card">
+        <div class="card-header">
+          Semua Transaksi
+        </div>
+        <div class="card-body">
+          <div th:if="${#lists.isEmpty(transactions)}" class="alert alert-warning">
+            Tidak ditemukan transaksi
+          </div>
+
+          <div th:if="${!#lists.isEmpty(transactions)}">
+            <div class="table-responsive">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>ID Transaksi</th>
+                    <th>ID Pelanggan</th>
+                    <th>Tanggal & Waktu</th>
+                    <th>Item</th>
+                    <th>Total Harga</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr th:each="transaction : ${transactions}">
+                    <td>
+                      <code th:text="${transaction.id}" class="transaction-id"></code>
+                    </td>
+                    <td>
+                      <span th:text="${transaction.userId}" class="fw-bold"></span>
+                    </td>
+                    <td>
+                      <span th:text="${#temporals.format(transaction.timestamp, 'dd/MM/yyyy')}"></span><br>
+                      <small class="text-muted" th:text="${#temporals.format(transaction.timestamp, 'HH:mm:ss')}"></small>
+                    </td>
+                    <td>
+                      <div class="transaction-items">
+                        <div th:each="item : ${transaction.items}" class="transaction-item">
+                          <div class="d-flex justify-content-between align-items-center">
+                            <span>
+                              <span th:text="${item.productName}" class="fw-bold"></span>
+                              <span class="text-muted">x</span>
+                              <span th:text="${item.qty}" class="fw-bold"></span>
+                            </span>
+                            <span class="text-muted">@ Rp [[${#numbers.formatInteger(item.price, 0, 'COMMA')}]]</span>
+                          </div>
+                        </div>
+                      </div>
+                    </td>
+                    <td>
+                      <span class="transaction-total">
+                        Rp [[${#numbers.formatInteger(transaction.total, 0, 'COMMA')}]]
+                      </span>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tindakan Cepat -->
+      <div class="card">
+        <div class="card-header">
+          Tindakan Cepat
+        </div>
+        <div class="card-body">
+          <div class="d-flex gap-3 flex-wrap">
+            <a th:href="@{/admin}" class="btn btn-secondary">
+              Kembali ke Dashboard
+            </a>
+            <a th:href="@{/admin/reports}" class="btn btn-primary">
+              Laporan Detail
+            </a>
+            <a th:href="@{/admin/products}" class="btn btn-success">
+              Kelola Produk
+            </a>
+            <form th:action="@{/admin/save}" method="post">
+              <button type="submit" class="btn btn-warning">
+                Simpan Data
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
