@@ -26,8 +26,6 @@ public class UserService extends AbstractService<User> {
 
     /**
      * Mendapatkan path file data pengguna untuk repository.
-     *
-     * @return Path file pengguna
      */
     @Override
     protected String getDataPath() {
@@ -36,8 +34,6 @@ public class UserService extends AbstractService<User> {
 
     /**
      * Mendapatkan kelas array tipe User untuk deserialisasi JSON.
-     *
-     * @return Kelas array pengguna
      */
     @Override
     protected Class<User[]> getTypeClass() {
@@ -46,9 +42,6 @@ public class UserService extends AbstractService<User> {
 
     /**
      * Mendapatkan ID dari objek pengguna.
-     *
-     * @param user Pengguna
-     * @return ID pengguna
      */
     @Override
     protected String getEntityId(User user) {
@@ -57,9 +50,6 @@ public class UserService extends AbstractService<User> {
 
     /**
      * Mengatur ID pada objek pengguna.
-     *
-     * @param user Pengguna
-     * @param id ID yang akan diset
      */
     @Override
     protected void setEntityId(User user, String id) {
@@ -68,10 +58,6 @@ public class UserService extends AbstractService<User> {
 
     /**
      * Melakukan autentikasi pengguna berdasarkan email dan password.
-     *
-     * @param email Email pengguna
-     * @param password Password pengguna
-     * @return Objek User jika autentikasi berhasil, atau null jika gagal
      */
     public User authenticate(String email, String password) {
         for (User u : getAll()) {
@@ -95,10 +81,6 @@ public class UserService extends AbstractService<User> {
 
     /**
      * Mendaftarkan pengguna baru dengan peran USER.
-     *
-     * @param email Email pengguna baru
-     * @param password Password pengguna baru
-     * @return true jika pendaftaran berhasil, false jika email sudah terdaftar
      */
     public boolean registerUser(String email, String password) {
         if (findByEmail(email) != null) {

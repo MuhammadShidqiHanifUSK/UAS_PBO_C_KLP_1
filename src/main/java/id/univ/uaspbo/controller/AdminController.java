@@ -19,6 +19,8 @@ import jakarta.servlet.http.HttpSession;
  * - Inheritance (Pewarisan): Controller ini mewarisi class dasar Controller Spring
  * - Enkapsulasi: Menggunakan private fields untuk service yang diinject melalui konstruktor
  *   dan hanya menyediakan method akses public untuk routing HTTP.
+ * @param s HttpSession sesi HTTP untuk memeriksa autentikasi admin
+ * @param m Model untuk mengirim data ke view (template)
  */
 @Controller
 @RequestMapping("/admin")

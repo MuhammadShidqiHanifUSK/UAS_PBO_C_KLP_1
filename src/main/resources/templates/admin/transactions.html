@@ -3,16 +3,9 @@
   Fungsi utama halaman ini adalah menampilkan daftar lengkap semua transaksi yang telah terjadi dalam sistem.
   Halaman ini juga menampilkan statistik singkat seperti total transaksi, total pendapatan, dan nilai rata-rata pesanan.
 
-  Template ini menggunakan Thymeleaf sebagai template engine dengan layout fragmen header untuk konsistensi tampilan.
-
   Data transaksi disediakan oleh AdminController di backend dan diteruskan ke variabel "transactions".
   Daftar transaksi memperlihatkan rincian ID transaksi, ID pelanggan, tanggal dan waktu transaksi,
   daftar item dengan jumlah dan harga per item, serta total harga transaksi.
-
-  Selain menampilkan tabel transaksi, halaman ini menyediakan tombol navigasi cepat untuk:
-  - Kembali ke dashboard admin
-  - Melihat laporan detail
-  - Mengelola produk
 
   File ini sangat penting untuk memantau aktivitas penjualan dan pendapatan oleh admin.
   Terhubung dengan AdminController.java yang mengelola data transaksi.

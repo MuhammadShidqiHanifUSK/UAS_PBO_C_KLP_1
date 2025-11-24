@@ -34,8 +34,6 @@ public class TransactionService {
 
     /**
      * Konstruktor TransactionService, menerima service produk sebagai dependensi.
-     *
-     * @param productService Service untuk operasi produk terkait transaksi
      */
     public TransactionService(ProductService productService) {
         this.productService = productService;
@@ -52,16 +50,11 @@ public class TransactionService {
 
     /**
      * Mendapatkan semua transaksi yang tersimpan.
-     *
-     * @return Daftar semua transaksi
      */
     public List<Transaction> getAll() { return repo.readAll(); }
 
     /**
      * Mendapatkan transaksi yang dilakukan oleh pengguna tertentu.
-     *
-     * @param userId ID pengguna untuk pencarian transaksi
-     * @return Daftar transaksi milik pengguna dengan ID tersebut
      */
     public List<Transaction> getByUserId(String userId) {
         return repo.readAll().stream().filter(t -> t.getUserId().equals(userId)).toList();
@@ -69,8 +62,6 @@ public class TransactionService {
 
     /**
      * Membuat transaksi baru dan mengurangi stok produk terkait.
-     *
-     * @param t Objek transaksi yang akan dibuat
      */
     public void createTransaction(Transaction t) {
         // mengurangi stok produk sesuai jumlah yang dibeli
@@ -90,8 +81,6 @@ public class TransactionService {
 
     /**
      * Menghitung total pendapatan berdasarkan semua transaksi.
-     *
-     * @return Total pendapatan dalam bentuk integer
      */
     public int getTotalRevenue() {
         return repo.readAll().stream().mapToInt(Transaction::getTotal).sum();
@@ -99,8 +88,6 @@ public class TransactionService {
 
     /**
      * Mendapatkan total jumlah transaksi/pesanan.
-     *
-     * @return Jumlah total transaksi
      */
     public int getTotalOrders() {
         return repo.readAll().size();
@@ -108,8 +95,6 @@ public class TransactionService {
 
     /**
      * Menghitung rata-rata nilai transaksi.
-     *
-     * @return Rata-rata nilai transaksi, 0 jika tidak ada transaksi
      */
     public double getAverageOrder() {
         var transactions = repo.readAll();
@@ -119,8 +104,6 @@ public class TransactionService {
 
     /**
      * Mendapatkan nilai transaksi tertinggi dari semua transaksi.
-     *
-     * @return Nilai transaksi tertinggi, 0 jika tidak ada transaksi
      */
     public int getHighestOrder() {
         var transactions = repo.readAll();
