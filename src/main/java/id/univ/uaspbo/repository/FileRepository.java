@@ -11,9 +11,7 @@ import java.util.List;
 /**
  * Kelas repository generik yang menangani penyimpanan data berbasis file JSON.
  * Menyediakan operasi dasar untuk membaca dan menyimpan entitas yang disimpan dalam file JSON.
- *
  * @param <T> Tipe entitas yang akan disimpan atau diambil dari file
- *
  * Konsep Object Oriented Programming (OOP) yang dipakai:
  * - Generic: Menggunakan tipe parameter generik agar dapat digunakan untuk berbagai tipe entitas.
  * - Exception Handling: Menangani exception menggunakan try-catch pada operasi baca dan simpan file.
@@ -50,9 +48,8 @@ public class FileRepository<T> {
         }
     }
 
-    /**
+    /*
      * Menyimpan semua entitas ke dalam file JSON.
-     *
      * @param list Daftar entitas yang akan disimpan
      */
     public void saveAll(List<T> list) {
