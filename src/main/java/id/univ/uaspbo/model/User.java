@@ -9,11 +9,6 @@ package id.univ.uaspbo.model;
  *  Konsep Object Oriented Programming (OOP) yang dipakai:
  * - Inheritance (Pewarisan): Menggunakan pewarisan dari kelas abstrak Entity untuk atribut id.
  * - Enkapsulasi: Atribut email, password, dan role bersifat private dan diakses lewat getter dan setter.
- * 
- * Field utama:
- *  - email    : email pengguna
- *  - password : password pengguna
- *  - role     : peran pengguna ("ADMIN" atau "USER")
  */
 public class User extends Entity {
     private String email; // Email pengguna

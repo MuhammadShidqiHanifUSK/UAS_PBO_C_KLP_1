@@ -13,12 +13,6 @@ import java.util.List;
  * - Enkapsulasi: Atribut private dilindungi dengan getter dan setter.
  * - Collection: Menggunakan List<TransactionItem> untuk menampung daftar item transaksi.
  * - Nested Class: Kelas statis inner TransactionItem mendeskripsikan detail item.
- * 
- * Field utama:
- *  - userId    : ID pengguna yang melakukan transaksi
- *  - items     : daftar produk yang dibeli (TransactionItem)
- *  - timestamp : waktu transaksi dilakukan
- *  - total     : total harga seluruh item
  */
 public class Transaction extends Entity {
     private String userId; // ID pengguna yang melakukan transaksi
@@ -63,7 +57,7 @@ public class Transaction extends Entity {
     public void setUserId(String userId) { 
         this.userId = userId; 
     }
-/**
+    /**
      * Method getter untuk mengambil daftar item dalam transaksi.
      */
     public List<TransactionItem> getItems() { 
@@ -110,11 +104,6 @@ public class Transaction extends Entity {
      * Inner class TransactionItem
      * Kelas inner statis yang merepresentasikan detail item dalam transaksi.
      * Mewakili satu item/produk dalam transaksi
-     * Field:
-     *  - productId   : ID produk
-     *  - productName : nama produk
-     *  - qty         : jumlah yang dibeli
-     *  - price       : harga per unit
      */
     public static class TransactionItem {
         private String productId; // ID produk

@@ -16,23 +16,6 @@ package id.univ.uaspbo.model;
  * Kelas ini menyederhanakan pengelolaan identifier unik pada semua entitas di sistem,
  * sehingga kelas-kelas turunan dapat fokus pada atribut dan perilaku khusus mereka saja
  * 
-* Field:
- * - id : String
- *     Sebagai identifier unik untuk setiap entitas. Bisa digunakan sebagai primary key 
- *     ketika menyimpan data ke file JSON atau database.
- * 
- * Konstruktor:
- * - Entity() 
- *     Konstruktor default, membuat objek kosong.
- * - Entity(String id) 
- *     Konstruktor dengan parameter id untuk langsung menginisialisasi identifier entitas.
- * 
- * Method:
- * - getId() : String
- *     Mengembalikan nilai id dari entitas.
- * - setId(String id) : void
- *     Mengatur atau memperbarui nilai id entitas.
- * 
  * Catatan:
  * - Karena kelas ini abstrak, tidak bisa langsung dibuat objek Entity.
  * - Kelas ini dirancang agar mudah di-extend oleh model-model lain.
