@@ -17,23 +17,16 @@ import java.util.List;
 public interface CrudService<T> {
     /**
      * Mendapatkan semua entitas.
-     *
-     * @return Daftar semua entitas yang tersedia.
      */
     List<T> getAll();
 
     /**
      * Mencari entitas berdasarkan ID.
-     *
-     * @param id ID entitas yang dicari.
-     * @return Entitas yang ditemukan, atau null jika tidak ada.
      */
     T findById(String id);
 
     /**
      * Menambahkan entitas baru.
-     *
-     * @param entity Entitas yang akan ditambahkan.
      */
     void add(T entity);
 

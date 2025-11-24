@@ -22,7 +22,7 @@ import jakarta.servlet.http.HttpSession;
 public class AuthController {
 
     private final UserService userService;
-    
+
     /**
      * Konstruktor utama AuthController yang menerima service pengguna
      * untuk melakukan autentikasi dan registrasi.
@@ -70,13 +70,13 @@ public class AuthController {
     public String registerPage() {
         return "register";
     }
-    
+
     /**
      * Memproses pendaftaran pengguna baru.
      * Melakukan validasi kecocokan password dan konfirmasi password.
      * Jika valid, mendaftarkan pengguna melalui UserService.
      * Menampilkan pesan sukses atau error sesuai hasil proses pendaftaran.
-     */    
+     */
     @PostMapping("/register")
     public String doRegister(@RequestParam String email, @RequestParam String password,
                            @RequestParam String confirmPassword, Model m) {

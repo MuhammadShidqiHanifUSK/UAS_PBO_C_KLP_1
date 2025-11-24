@@ -18,12 +18,15 @@ import java.util.List;
  * - Inheritance (Pewarisan): Memanfaatkan implementasi CRUD dasar dari AbstractService.
  * - Encapsulation (Enkapsulasi): Variabel productsPath bersifat private dan diakses lewat method.
  * - Polymorphism (Polimorfisme): Meng-override method abstrak dari AbstractService.
+ * @param product Tipe entitas produk yang dikelola oleh service ini.
+ * @param id ID produk yang akan diatur.
+
  */
 @Service
 public class ProductService extends AbstractService<Product> {
 
     @Value("${uas.data.products}")
-    private String productsPath;  // Path file data produk
+    private String productsPath;    // Path file data produk
 
     /**
      * Mendapatkan path data produk untuk repository file.
@@ -59,9 +62,7 @@ public class ProductService extends AbstractService<Product> {
 
     /**
      * Melakukan pencarian produk berdasarkan nama produk (case-insensitive).
-     *
-     * @param query Kata kunci pencarian
-     * @return Daftar produk yang memenuhi kriteria pencarian
+     * query = Kata kunci pencarian
      */
     public List<Product> searchProducts(String query) {
         if (query == null || query.trim().isEmpty()) {
@@ -75,10 +76,8 @@ public class ProductService extends AbstractService<Product> {
 
     /**
      * Mengurutkan daftar produk berdasarkan kriteria tertentu.
-     *
-     * @param products Daftar produk yang akan diurutkan
-     * @param sortBy Kriteria pengurutan ("name_asc", "name_desc", "price_asc", "price_desc")
-     * @return Daftar produk yang sudah diurutkan
+     * products Daftar produk yang akan diurutkan
+     * sortBy Kriteria pengurutan ("name_asc", "name_desc", "price_asc", "price_desc")
      */
     public List<Product> sortProducts(List<Product> products, String sortBy) {
         if (sortBy == null || sortBy.isEmpty()) {

@@ -31,10 +31,6 @@ public class Transaction extends Entity {
      * Inisialisasi objek transaksi dengan semua atribut.
      *
      * @param id Identifier unik transaksi, diwariskan dari Entity
-     * @param userId ID pengguna yang melakukan transaksi
-     * @param items Daftar item dalam transaksi
-     * @param timestamp Waktu transaksi terjadi
-     * @param total Total harga transaksi
      */
     public Transaction(String id, String userId, List<TransactionItem> items, LocalDateTime timestamp, int total) {
         super(id); // panggil konstruktor superclass untuk mengatur id

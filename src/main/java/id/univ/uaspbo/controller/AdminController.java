@@ -27,7 +27,7 @@ public class AdminController {
     private final ProductService productService;
     private final TransactionService transactionService;
     private final UserService userService;
-   
+
     /**
      * Konstruktor utama kelas AdminController.
      * Menginisialisasi service produk, transaksi, dan pengguna yang akan digunakan oleh controller.
@@ -197,7 +197,7 @@ public class AdminController {
         productService.add(p);
         return "redirect:/admin/products";
     }
-   
+
     /**
      * Menangani pembaruan data produk yang sudah ada berdasarkan form input.
      * Hanya admin yang sudah login dapat melakukan pembaruan data produk.
@@ -219,7 +219,7 @@ public class AdminController {
         }
         return "redirect:/admin/products";
     }
-    
+
     /**
      * Menangani penghapusan produk berdasarkan ID produk.
      * Hanya admin yang sudah login dapat menghapus produk.

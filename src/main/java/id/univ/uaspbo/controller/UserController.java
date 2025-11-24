@@ -102,6 +102,7 @@ public class UserController {
         return "redirect:/user/history";
     }
 
+
     /**
      * Menampilkan riwayat transaksi dari pengguna saat ini.
      * Jika sesi tidak valid, diarahkan ke halaman login.

@@ -5,23 +5,24 @@ package id.univ.uaspbo.model;
  * seperti 'ADMIN' dan 'USER'. Kelas ini merupakan turunan dari kelas Entity,
  * sehingga memiliki atribut id unik. Model ini menyimpan informasi email,
  * password, dan role pengguna.
- * 
- *  Konsep Object Oriented Programming (OOP) yang dipakai:
+ *
+ * Konsep Object Oriented Programming (OOP) yang dipakai:
  * - Inheritance (Pewarisan): Menggunakan pewarisan dari kelas abstrak Entity untuk atribut id.
  * - Enkapsulasi: Atribut email, password, dan role bersifat private dan diakses lewat getter dan setter.
  */
+
 public class User extends Entity {
-    private String email;       // Email pengguna
-    private String password;    // Password pengguna
-    private String role;        // "ADMIN" or "USER"
+    private String email;               // Email pengguna
+    private String password;            // Password pengguna
+    private String role;                // Peran pengguna, misalnya "ADMIN" atau "USER"
 
     /**
      * Konstruktor default tanpa parameter.
      * Membuat objek pengguna dengan atribut default.
      */
-    public User() {} 
+    public User() {}
 
-     /**
+    /**
      * Konstruktor dengan parameter lengkap.
      * Menginisialisasi objek user dengan id, email, password, dan role sesuai input.
      *
@@ -36,46 +37,33 @@ public class User extends Entity {
         this.password = password;
         this.role = role;
     }
+    /**
+     * Mengambil email pengguna.
+     */
+    public String getEmail() { return email; }
 
     /**
-     * Method getter untuk mengambil email pengguna.
+     * Mengatur email pengguna.
      */
-    public String getEmail() { 
-        return email; 
-    }
+    public void setEmail(String email) { this.email = email; }
 
     /**
-     * Method setter untuk mengatur email pengguna.
+     * Mengambil password pengguna.
      */
-    public void setEmail(String email) { 
-        this.email = email; 
-    }
+    public String getPassword() { return password; }
 
     /**
-     * Method getter untuk mengambil password pengguna.
+     * Mengatur password pengguna.
      */
-    public String getPassword() { 
-        return password; 
-    }
+    public void setPassword(String password) { this.password = password; }
 
     /**
-     * Method setter untuk mengatur password pengguna.
+     * Mengambil peran pengguna.
      */
-    public void setPassword(String password) { 
-        this.password = password; 
-    }
+    public String getRole() { return role; }
 
     /**
-     * Method getter untuk mengambil peran pengguna.
+     * Mengatur peran pengguna.
      */
-    public String getRole() { 
-        return role; 
-    }
-
-    /**
-     * Method setter untuk mengatur peran pengguna.
-     */
-    public void setRole(String role) { 
-        this.role = role; 
-    }
+    public void setRole(String role) { this.role = role; }
 }
