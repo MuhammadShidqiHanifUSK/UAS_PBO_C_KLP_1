@@ -17,7 +17,7 @@ Aplikasi ini menerapkan seluruh konsep inti OOP sesuai ketentuan UAS, termasuk  
 Secara umum, aplikasi menyediakan dua jenis akun **Admin** dan **User** dengan fungsionalitas berbeda. Admin dapat mengelola seluruh data restoran seperti menambah, mengubah, dan menghapus menu, serta melihat user dan riwayat transaksi. Sementara User dapat melihat menu, melakukan pemesanan, melakukan pembayaran, dan melihat riwayat transaksi mereka sendiri. Semua proses transaksi dicatat secara otomatis untuk memastikan data tetap konsisten.
 
 Aplikasi ini dibangun dengan **pendekatan modular** agar mudah dikembangkan, dibaca, dan dipelihara, sekaligus memenuhi seluruh standar penilaian baik dari sisi fungsional, konsep OOP, maupun dokumentasi dan struktur kode.
-# UAS-PBO-WEB
+# UAS_PBO_C_KLP_1
 
 Panduan ini menjelaskan cara menjalankan aplikasi dari repository ini, dengan instruksi khusus untuk:
 - macOS (Apple Silicon / M1 / M2)
