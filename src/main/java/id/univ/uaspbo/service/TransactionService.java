@@ -25,7 +25,7 @@ import java.util.UUID;
  */
 @Service
 public class TransactionService {
-    private FileRepository<Transaction> repo;
+    private FileRepository<Transaction> repo;       // Repository file untuk menyimpan data transaksi
 
     @Value("${uas.data.transactions}")
     private String transactionsPath;  // Path file data transaksi

@@ -26,10 +26,10 @@ public class User extends Entity {
      * Konstruktor dengan parameter lengkap.
      * Menginisialisasi objek user dengan id, email, password, dan role sesuai input.
      *
-     * @param id Identifier unik pengguna, diwariskan dari Entity
-     * @param email Email pengguna
-     * @param password Password pengguna
-     * @param role Peran pengguna ("ADMIN" atau "USER")
+     * id = Identifier unik pengguna, diwariskan dari Entity
+     * email = Email pengguna
+     * password = Password pengguna
+     * role = Peran pengguna ("ADMIN" atau "USER")
      */
     public User(String id, String email, String password, String role) {
         super(id);
